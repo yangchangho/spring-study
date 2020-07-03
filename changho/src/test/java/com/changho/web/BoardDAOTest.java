@@ -78,7 +78,7 @@ public class BoardDAOTest {
 
 	
 
-	@Test  @Ignore
+	@Test  
 
 	public void testGetBoardContent() throws Exception {
 
@@ -114,7 +114,7 @@ public class BoardDAOTest {
 
 	
 
-	@Test @Ignore
+	@Test  @Ignore
 
 	public void testInsertBoard() throws Exception {
 
@@ -186,7 +186,7 @@ public class BoardDAOTest {
 
 	
 
-	@Test  @Ignore
+	@Test @Ignore
 
 	public void tesDeleteBoard() throws Exception {
 
@@ -210,7 +210,7 @@ public class BoardDAOTest {
 
 
 
-	@Test 
+	@Test @Ignore
 
 	public void testUpdateViewCnt() throws Exception {
 
