@@ -3,6 +3,7 @@ package com.changho.web.board.dao;
 import java.util.List;
 
 import com.changho.web.board.model.BoardVO;
+import com.changho.web.board.model.ReplyVO;
 import com.changho.web.common.Pagination;
 import com.changho.web.common.Search;
 

@@ -34,7 +34,7 @@
 	<update id = "updateReply" parameterType = "com.changho.web.board.model.ReplyVO">
 		UPDATE TBL_REPLY SET
 			CONTENT = #{content}
-			,EDIT_DT = now{}
+			,EDIT_DT = now()
 		WHERE
 			RID = #{rid}
 	</update>

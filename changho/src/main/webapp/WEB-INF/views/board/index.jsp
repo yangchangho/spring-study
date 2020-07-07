@@ -35,6 +35,7 @@
 		}
 	</style>
 	<script>
+	
 		// 글 작성 
 		$(document).on('click', '#btnWriteForm', function(e){
 			e.preventDefault();
@@ -119,7 +120,7 @@
 <article>
 	<div class = "container">
 		<div class = "table-responsive">
-	<h2>board list</h2>
+	<h2>board</h2>
 	<table class = "table table-striped table-sm">
 		<colgroup>
 			<col style = "width:5%;"/>

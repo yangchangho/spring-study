@@ -7,7 +7,7 @@ import java.util.Map;
 
 
 import com.changho.web.board.model.BoardVO;
-
+import com.changho.web.board.model.ReplyVO;
 import com.changho.web.common.Search;
 
 

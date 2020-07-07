@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.changho.web.board.dao.BoardDAO;
 
 import com.changho.web.board.model.BoardVO;
+import com.changho.web.board.model.ReplyVO;
 import com.changho.web.common.Pagination;
 import com.changho.web.common.Search;
 import com.changho.web.error.controller.NotFoundException;

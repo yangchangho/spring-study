@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.changho.web.board.model.BoardVO;
+import com.changho.web.board.model.ReplyVO;
 import com.changho.web.common.Pagination;
 import com.changho.web.common.Search;
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.changho.web.board.model.BoardVO;
+import com.changho.web.board.model.ReplyVO;
 import com.changho.web.board.service.BoardService;
 import com.changho.web.common.Pagination;
 import com.changho.web.common.Search;
@@ -97,7 +98,7 @@ public class BoardController {
 	public String getBoardContent(Model model, 
 			@RequestParam("bid")int bid) throws Exception {
 		
-		model.addAttribute("boardContent", boardService.getBoardContent(bid))
+		model.addAttribute("boardContent", boardService.getBoardContent(bid));
 		model.addAttribute("replyVO", new ReplyVO()); // 댓글관련
 		return "board/boardContent";
 	}
