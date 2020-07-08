@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.changho.web.menu.model.MenuVO;
 
 @Controller
-@RequestMapping("/menu")
+@RequestMapping(value = "/menu")
 public class MenuController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MenuController.class);
 
-	@RequestMapping(value = "/getMenu", method = RequestMethod.GET)
+	@RequestMapping(value = "/getMenuList", method = RequestMethod.GET)
 	public String getMenuList(Model model) throws Exception{
 		
 		model.addAttribute("menuVO", new MenuVO());

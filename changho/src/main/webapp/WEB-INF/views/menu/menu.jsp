@@ -3,13 +3,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
 
-<%-- <c:url var="saveURL" value="/restMenu/saveMenu"></c:url>
+<c:url var="saveURL" value="/restMenu/saveMenu"></c:url>
 
 <c:url var="deleteURL" value="/restMenu/deleteMenu"></c:url>
 
 <c:url var="updateURL" value="/restMenu/updateMenu"></c:url>
 
-<c:url var="getMenuListURL" value="/restMenu/getMenuList"></c:url> --%>
+<c:url var="getMenuListURL" value="/restMenu/getMenuList"></c:url> 
 
 
 <!DOCTYPE html>
@@ -23,6 +23,7 @@
 
 	//메뉴 리스트 
 	$(function(){
+		
 		fn_showList();
 	});
 	
@@ -30,7 +31,7 @@
 		var paramData = {};
 		
 		$.ajax({
-			url : "${pageContext.request.contextPath}/menu/getMenuList"
+			url : "${getMenuListURL}"
 			, type : "POST"
 			, dataType :  "json"
 			, data : paramData
@@ -44,7 +45,13 @@
 						result.menuList.forEach(function(e) {
 							htmls += '<tr>';
 							htmls += '<td>' + e.mid + '</td>';
-							htmls += '<td>' + e.code + '</td>';
+							//htmls += '<td>' + e.code + '</td>';
+							
+							htmls += '<td>'; 
+							htmls += '<a href="#" onClick="fn_menuInfo(' + e.mid + ',\'' + e.code +'\',\'' + e.codename + '\', ' + e.sort_num + ', \'' + e.comment + '\')" >'; 
+							htmls += e.code; htmls += '</a>'; 
+							htmls += '</td>';
+							
 							htmls += '<td>' + e.codename + '</td>';
 							htmls += '<td>' + e.sort_num + '</td>';
 							htmls += '<td>' + e.comment + '</td>';
@@ -66,6 +73,13 @@
 		e.preventDefault();
 		
 		var url = "${saveURL}";
+		
+		// 리스트를 클릭하게되면 리스트의 정보가 셋팅이되므로 mid 값을 확인 
+		// 값이 있을경우 데이터를 수정 하겠다는 의미로 입력 url을 수정 url로 변경 
+		
+		if ($('#mid').val() !=0 ) {
+			var url = "${updateURL}";
+		}
         
 		var paramData = {
 				"code" : $("#code").val()
@@ -83,6 +97,69 @@
 				fn_showList();
 			}
 		});
+		
+		//  초기화 
+		$.ajax({
+				url : url
+				,type : "POST"
+				,dataType : "json"
+				,data : paramData
+				,success : function(result) {
+					fn_showList();
+					
+					//초기화 이벤트 호출
+					$("#btnInit").trigger("click");
+				}
+		});
+	});
+	
+	//초기화 버튼 이벤트 부분 
+	$(document).on('click','#btnInit', function(e){
+			$('#mid').val('');
+			$('#code').val('');
+			$('#codename').val('');
+			$('#sort_num').val('');
+			$('#comment').val('');
+	});
+	
+	//메뉴 정보 세팅 
+	function fn_menuInfo(mid, code, codename, sort_num, comment) {
+		$('#mid').val(mid);
+		$('#code').val(code);
+		$('#codename').val(codename);
+		$('#sort_num').val(sort_num);
+		$('#comment').val(comment);
+		
+		// 코드 부분 일기 모드로 전환 
+		$("#code").attr("readonly", true);
+	}
+	
+	// 삭제 
+	$(document).on('click', '#btnDelete', function(e) {
+		e.preventDefault();
+		
+		if ($("#code").val() == "") {
+				alert("삭제할 코드를 선택해 주세요.");
+				return;
+		}
+		
+		var url = "${deleteURL}";
+		
+		var paramData = { "code" : $("#code").val()};
+		
+		$.ajax({
+			url : url
+			, type : "POST"
+			, dataType :  "json"
+			, data : paramData
+			, success : function(result){
+				fn_showList();
+				
+				//삭제 후 셋팅값 초기
+				$("#btnInit").trigger("click");
+			}
+		});
+		
 	});
 
 </script>
