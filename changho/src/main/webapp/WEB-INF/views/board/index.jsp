@@ -30,7 +30,7 @@
 <title>Board</title>
 	<style>
 		body {
-			padding-top : 70px;
+			padding-top : 0px;
 			padding-bottom: 30px;
 		}
 	</style>
