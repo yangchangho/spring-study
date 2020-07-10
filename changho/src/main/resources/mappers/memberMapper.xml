@@ -30,4 +30,24 @@
 		USERNAME = #{userName}
 		WHERE USERID = #{userId}
 	</update>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="memberDelete">
+		DELETE FROM tbl_member
+		WHERE USERID = #{userId}
+		  AND USERPASS = #{userPass} 
+	</delete>
+	
+	<!-- 패스워드 체크 -->
+	<select id="passChk" resultType="int">
+		SELECT COUNT(*) FROM tbl_member
+		WHERE USERID = #{userId}
+		  AND USERPASS = #{userPass}
+	</select>
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) FROM tbl_member
+		WHERE USERID = #{userId}
+	</select>
 </mapper>

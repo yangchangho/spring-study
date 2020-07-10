@@ -41,6 +41,8 @@
 			e.preventDefault();
 			
 			location.href = "${pageContext.request.contextPath}/board/boardForm";
+			
+			
 		});
 		
 		// 게시글 조회 
@@ -163,8 +165,12 @@
 	</table>
 	</div>
 	
+	
+							
 	<div>
+	<c:if test="${member.userId != null}">
 		<button type = "button" class = "btn btn-sm btn-primary" id ="btnWriteForm">글쓰기</button>
+	</c:if>
 	</div>
 	
 	<!-- pagination{s} -->

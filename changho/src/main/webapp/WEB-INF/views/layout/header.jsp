@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +28,7 @@
 
 <!--  메뉴바 추가 {s} -->
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">YANG </a>
+  <a class="navbar-brand" href="${pageContext.request.contextPath}">YANG </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -38,13 +42,37 @@
         <a class="nav-link" href="${pageContext.request.contextPath}/menu/getMenuList">MENU LIST</a>
       </li>
       
+      
     </ul>
-    <form class="form-inline my-2 my-md-0">
-      <input class="form-control" type="text" placeholder="Search">
-    </form>
+    
+    <div class = "form-group">
+    
+    	<form class="form-inline my-2 my-md-0" >
+    
+		<c:if test="${member != null}">
+			<p>${member.userId}님 안녕하세요.</p>
+			<a href = "#" onClick= "logoutClick()">로그아웃</a>
+		</c:if>
+	  </form>
+	</div>
+		
+	
+	
+  
   </div>
 </nav>
 <!--  상단 메뉴바 {e} -->
+
+<script>
+
+	function logoutClick(){ 
+		
+		location.href="${pageContext.request.contextPath}/member/logout";
+		
+		}
+
+
+</script>
 
 <meta charset="UTF-8">
 <title>Insert title here</title>

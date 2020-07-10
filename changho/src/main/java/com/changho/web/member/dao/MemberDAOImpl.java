@@ -35,4 +35,28 @@ public class MemberDAOImpl implements MemberDAO {
 		// 아이디가 memberUpdate인 쿼리에 파라미터들을 넣어줍니다.
 		sql.update("com.changho.web.member.memberMapper.memberUpdate", memberVO); 
 	}
+	
+	// 회원 탈퇴 
+	@Override
+	public void memberDelete(MemberVO memberVO) throws Exception {
+		// MemberVO에 담긴 값들을 보내줍니다.
+		// 그럼 xml에서 memberMapper.memberDelete에 보시면
+		//  #{userId}, #{userPass}에 파라미터값이 매칭이 되겠지요.
+		sql.delete("com.changho.web.member.memberMapper.memberDelete", memberVO);
+		
+	}
+	
+	// 패스워드 체크
+	@Override
+	public int passChk(MemberVO memberVO) throws Exception {
+		int result = sql.selectOne("com.changho.web.member.memberMapper.passChk", memberVO);
+		return result;
+	}
+	
+	// 아이디 중복 체크
+	@Override
+	public int idChk(MemberVO memberVO) throws Exception {
+		int result = sql.selectOne("com.changho.web.member.memberMapper.idChk", memberVO);
+		return result;
+	}
 }

@@ -18,7 +18,7 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		// 취소
-		$(".cencle").on("click", function(){
+		$(".cancle").on("click", function(){
 			
 			location.href = "${pageContext.request.contextPath}";
 					    
@@ -41,16 +41,50 @@
 				$("#userName").focus();
 				return false;
 			}
+			
+			var idChkVal = $("#idChk").val();
+			
+			
+			if(idChkVal == "N"){
+				alert("사용 할 수 없는 아이디 입니다 .");
+				
+				return false;
+				
+			}else if(idChkVal == "Y"){
+				$("#regForm").submit();
+			}
+			
 			if(alert("회원가입 성공 !")) {
 				location.href = "${pageContext.request.contextPath}";
 			}
 			
-			
-			
-			
 		});
 		
 	})
+	
+	function fn_idChk(){
+			$.ajax({
+				url : "${pageContext.request.contextPath}/member/idChk",
+				type : "post",
+				dataType : "json",
+				data : {"userId" : $("#userId").val()},
+				success : function(data){
+					
+					if($("#userId").val()==""){
+						alert("아이디를 입력해주세요.");
+						$("#userId").focus();
+						return false;
+					}
+					
+					if(data == 1){
+						alert("중복된 아이디입니다.");
+					}else if(data == 0){
+						$("#idChk").attr("value", "Y");
+						alert("사용가능한 아이디입니다.");
+					}
+				}
+			})
+		}
 			
 	</script>
 	<body>
@@ -59,6 +93,7 @@
 				<div class="form-group has-feedback">
 					<label class="control-label" for="userId">아이디</label>
 					<input class="form-control" type="text" id="userId" name="userId" />
+					<button class="idChk" type="button" id="idChk" onclick="fn_idChk();" value="N">중복 확인</button>
 				</div>
 				<div class="form-group has-feedback">
 					<label class="control-label" for="userPass">패스워드</label>
@@ -70,7 +105,7 @@
 				</div>
 				<div class="form-group has-feedback">
 					<button class="btn btn-success" type="submit" id="submit">회원가입</button>
-					<button class="cencle btn btn-danger" type="button">취소</button>
+					<button class="cancle btn btn-danger" type="button">취소</button>
 				</div>
 			</form>
 		</section>

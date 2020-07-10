@@ -18,7 +18,8 @@
 </head>
 <a href="${pageContext.request.contextPath}/board/getBoardList">게시판</a><br />
 <script type="text/javascript">
-
+	
+	// 로그아웃 버튼 
 	$(document).ready(function(){
 		$("#logoutBtn").on("click", function(){
 			location.href="member/logout";
@@ -26,6 +27,7 @@
 		
 	});
 	
+	// 회원가입 버튼 
 	$(document).ready(function(){
 		$("#registerBtn").on("click", function(){
 			location.href="${pageContext.request.contextPath}/member/register";
@@ -33,9 +35,18 @@
 		
 	});
 	
+	// 회원 수정 버튼 
 	$(document).ready(function(){
 		$("#memberUpdateBtn").on("click", function(){
 			location.href="${pageContext.request.contextPath}/member/memberUpdateView";
+		});
+		
+	});
+	
+	// 회원 탈퇴 버튼 
+	$(document).ready(function(){
+		$("#memberDeleteBtn").on("click", function(){
+			location.href="${pageContext.request.contextPath}/member/memberDeleteView";
 		});
 		
 	});
@@ -62,6 +73,7 @@
 				<p>${member.userId}님 환영 합니다.</p>
 				<button id="memberUpdateBtn" type="button">회원정보수정</button>
 				<button id="logoutBtn" type="button">로그아웃</button>
+				<button id="memberDeleteBtn" type="button">회원탈퇴</button>
 			</div>
 		</c:if>
 		<c:if test="${msg == false}">
