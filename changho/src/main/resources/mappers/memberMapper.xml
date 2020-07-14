@@ -20,13 +20,13 @@
 		SELECT USERID, USERPASS 
 		  FROM tbl_member
 		 WHERE USERID = #{userId}
-		   AND USERPASS = #{userPass}   
+<!-- 	USERPASS = #{userPass}, -->
 	</select>
 	
 	<!-- 회원정보 수정 -->
 	<update id="memberUpdate">
 		UPDATE tbl_member SET 
-		USERPASS = #{userPass},
+	 	USERPASS = #{userPass}, 
 		USERNAME = #{userName}
 		WHERE USERID = #{userId}
 	</update>
@@ -35,7 +35,7 @@
 	<delete id="memberDelete">
 		DELETE FROM tbl_member
 		WHERE USERID = #{userId}
-		  AND USERPASS = #{userPass} 
+<!-- 	USERPASS = #{userPass}, -->
 	</delete>
 	
 	<!-- 패스워드 체크 -->

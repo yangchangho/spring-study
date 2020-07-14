@@ -84,6 +84,7 @@ body {
 	<article>
 		<div class = "container" role = "main">
 			<h2>board Form</h2>
+			<c:if test="${member != null }">
 			<form:form name = "form" id = "form" role = "form" modelAttribute = "boardVO" method = "post" 
 				action = "${pageContext.request.contextPath}/board/saveBoard">
 				<form:hidden path = "bid"/>
@@ -97,7 +98,7 @@ body {
 				
 				<div class = "mb-3">
 					<label for = "reg_id">작성자</label>
-					<form:input path ="reg_id" id = "reg_id" class = "form-control" placeholder = "이름을 입력해주세요" />
+					<form:input path ="reg_id" id = "reg_id" class = "form-control"  />
 				</div>
 				
 				<div class = "mb-3">
@@ -109,13 +110,15 @@ body {
 					<label for = "tag">TAG</label>
 					<form:input path = "tag" id = "tag" class = "form-control" placeholder = "태그를 입력해주세요"/>
 				</div>
+			
 				</form:form>
-				
+				</c:if>
 				<div>
 					<button type = "button" class = "btn btn-sm btn-primary" id = "btnSave">저장</button>
 					<button type = "button" class = "btn btn-sm btn-primary" id = "btnList">목록</button>
 					
 				</div>
+				
 		</div>
 	</article>
 

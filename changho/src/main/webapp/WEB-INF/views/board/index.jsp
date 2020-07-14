@@ -147,6 +147,7 @@
 				</c:when>
 				<c:when test = "${!empty boardList}">
 					<c:forEach var = "list" items = "${boardList}">
+						
 						<tr>
 							<td><c:out value = "${list.bid}"/></td>
 							<td>
@@ -158,6 +159,7 @@
 							<td><c:out value = "${list.view_cnt}"/></td>
 							<td><c:out value = "${list.reg_dt}"/></td>
 						</tr>
+						
 					</c:forEach>
 				</c:when>
 			</c:choose>

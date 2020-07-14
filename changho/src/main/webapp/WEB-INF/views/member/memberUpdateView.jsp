@@ -9,12 +9,12 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	 	
 	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<title>회원가입</title>
+		<title>회원 정보 수정 </title>
 	</head>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			// 취소
-			$(".cencle").on("click", function(){
+			$(".cancle").on("click", function(){
 				
 				location.href = "${pageContext.request.contextPath}";
 						    
@@ -31,9 +31,8 @@
 					$("#userName").focus();
 					return false;
 				}
-			});
-			
 				
+			});
 		})
 	</script>
 	<body>
@@ -53,9 +52,13 @@
 				</div>
 				<div class="form-group has-feedback">
 					<button class="btn btn-success" type="submit" id="submit">회원정보수정</button>
-					<button class="cencle btn btn-danger" type="button">취소</button>
+					<button class="cancle btn btn-danger" type="button">취소</button>
 				</div>
+				
 			</form>
+			
+					
+				
 		</section>
 		
 	</body>

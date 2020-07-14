@@ -23,7 +23,9 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
+						
 						classpath:servlet-context.xml
+						
 						
 			</param-value>
 		</init-param>
@@ -36,6 +38,8 @@
 	</servlet-mapping>
 	
 	<!-- Character Set Filter -->
+	
+	
 
 <filter>
 

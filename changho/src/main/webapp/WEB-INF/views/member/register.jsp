@@ -46,7 +46,7 @@
 			
 			
 			if(idChkVal == "N"){
-				alert("사용 할 수 없는 아이디 입니다 .");
+				alert("아이디 중복 확인을 해주세요 .");
 				
 				return false;
 				

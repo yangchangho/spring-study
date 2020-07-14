@@ -13,13 +13,14 @@
 
 	<select id="getBoardList" resultType="com.changho.web.board.model.BoardVO">
 
-		SELECT
+		 SELECT
 
 			BID, CATE_CD, TITLE, CONTENT, TAG, VIEW_CNT, REG_ID, REG_DT, EDIT_DT
 
 		FROM
 
 			TBL_BOARD
+			
 			
 		<trim prefix = "WHERE" prefixOverrides = "AND|OR">
 			<if test = "searchType == 'title'and keyword != null and keyword != ''">
@@ -33,8 +34,10 @@
 			</if>
 			
 		</trim>
-			
+		ORDER BY bid DESC	
 		LIMIT #{startList}, #{listSize}
+		
+		
 
 	</select>
 	
