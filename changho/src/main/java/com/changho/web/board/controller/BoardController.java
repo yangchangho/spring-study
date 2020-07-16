@@ -67,7 +67,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/boardForm")
-	public String boardForm(@ModelAttribute("boardVO") BoardVO vo, Model model) {
+	public String boardForm(@ModelAttribute("boardVO") BoardVO boardVO, Model model) {
+		
+
 		return "board/boardForm";
 	}
 	
@@ -83,23 +85,27 @@ public class BoardController {
 			
 			boardService.updateBoard(boardVO);
 			
+			
 		}else {
 			
 			boardService.insertBoard(boardVO);
 			
+			
 		}
-		
 		return "redirect:/board/getBoardList";
+		
 
 	}
 	
-	//게시글 조회수 
+	//게시글 조회
 	@RequestMapping(value = "/getBoardContent", method = RequestMethod.GET)
 	public String getBoardContent(Model model, 
-			@RequestParam("bid")int bid) throws Exception {
+			@RequestParam("bid")int bid,
+			 @ModelAttribute("search")Search search) throws Exception {
 		
 		model.addAttribute("boardContent", boardService.getBoardContent(bid));
 		model.addAttribute("replyVO", new ReplyVO()); // 댓글관련
+		model.addAttribute("search",search);
 		return "board/boardContent";
 	}
 	
@@ -108,11 +114,18 @@ public class BoardController {
 	@RequestMapping(value = "/editForm", method = RequestMethod.GET)
 
 	public String editForm(@RequestParam("bid") int bid , 
-			@RequestParam("mode") String mode, Model model) throws Exception {
+			@RequestParam("mode") String mode,
+			@ModelAttribute("search") Search search, RedirectAttributes rttr, Model model) throws Exception {
 
 		model.addAttribute("boardContent", boardService.getBoardContent(bid));
 		model.addAttribute("mode", mode);
 		model.addAttribute("boardVO", new BoardVO());
+		
+		
+		rttr.addAttribute("page", search.getPage());
+		rttr.addAttribute("range", search.getRange());
+		rttr.addAttribute("searchType", search.getSearchType());
+		rttr.addAttribute("keyword", search.getKeyword());
 
 		return "board/boardForm";
 
@@ -121,8 +134,14 @@ public class BoardController {
 	//게시글 삭제 
 	@RequestMapping(value = "/deleteBoard", method = RequestMethod.GET)
 	public String deleteBoard(RedirectAttributes rttr, 
-			@RequestParam("bid")int bid) throws Exception {
+							 @RequestParam("bid")int bid,
+							 @ModelAttribute("search") Search search) throws Exception {
 		boardService.deleteBoard(bid);
+		
+		rttr.addAttribute("page", search.getPage());
+		rttr.addAttribute("range", search.getRange());
+		rttr.addAttribute("searchType", search.getSearchType());
+		rttr.addAttribute("keyword", search.getKeyword());
 		
 		return "redirect:/board/getBoardList";
 		

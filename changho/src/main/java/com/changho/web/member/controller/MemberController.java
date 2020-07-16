@@ -76,8 +76,15 @@ public class MemberController {
 		
 		session.getAttribute("member");
 		MemberVO login = service.login(memberVO);
-		boolean pwdMatch = pwdEncoder.matches(memberVO.getUserPass(), login.getUserPass());
-
+		//boolean pwdMatch = pwdEncoder.matches(memberVO.getUserPass(), login.getUserPass());
+		
+		boolean pwdMatch;
+		if(login != null) {
+		pwdMatch = pwdEncoder.matches(memberVO.getUserPass(), login.getUserPass());
+		} else {
+		pwdMatch = false;
+		}
+		
 		if(login != null && pwdMatch == true) {
 			session.setAttribute("member", login);
 		} else {

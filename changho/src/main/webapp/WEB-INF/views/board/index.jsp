@@ -46,11 +46,14 @@
 		});
 		
 		// 게시글 조회 
-		function fn_contentView(bid){
+		function fn_contentView(bid, page, range, searchType, keyword){
 			
 			var url = "${pageContext.request.contextPath}/board/getBoardContent";
 			url = url + "?bid="+bid;
-			
+			url = url + "&page="+page;
+			url = url + "&range="+range;
+			url = url + "&searchType="+$('#searchType').val();
+			url = url + "&keyword="+ $('#keyword').val();
 			location.href = url;
 		}
 		
@@ -151,7 +154,7 @@
 						<tr>
 							<td><c:out value = "${list.bid}"/></td>
 							<td>
-								<a href ="#" onClick = "fn_contentView(<c:out value ="${list.bid}"/>)">
+								<a href ="#" onClick = "fn_contentView(<c:out value ="${list.bid}, ${search.page},${search.range},${search.searchType},${search.keyword}"/>)">
 									<c:out value = "${list.title}"/>
 								</a>
 							</td>

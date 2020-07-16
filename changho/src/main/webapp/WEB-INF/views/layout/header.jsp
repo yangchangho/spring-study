@@ -50,7 +50,7 @@
     	<form class="form-inline my-2 my-md-0" >
     
 		<c:if test="${member != null}">
-			<p>${member.userId}님 안녕하세요.</p>
+			
 			<a href = "#" onClick= "logoutClick()">로그아웃</a>
 		</c:if>
 	  </form>

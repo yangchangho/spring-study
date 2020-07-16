@@ -19,13 +19,19 @@
 
 	//목록으로 이동 버튼 이벤트
 	$(document).on('click','#btnList', function() {
-		location.href = "${pageContext.request.contextPath}/board/getBoardList";
+		location.href = "${pageContext.request.contextPath}/board/getBoardList?page=${search.page}"
+							+ "&range =${search.range}"
+							+ "&searchType=${search.searchType}&keyword=${search.keyword}";
 	});
 	
 	//수정 버튼 클릭 이벤트
 	$(document).on('click', '#btnUpdate', function() {
 		var url = "${pageContext.request.contextPath}/board/editForm";
 		url = url + "?bid=" + ${boardContent.bid};
+		url = url + "&page="+$('#page').val();
+		url = url + "&range="+$('#range').val();
+		url = url + "&searchType="+$('#searchType').val();
+		url = url + "&keyword="+$('#keyword').val();
 		url = url + "&mode=edit";
 		
 		location.href = url;
@@ -35,6 +41,10 @@
 	$(document).on('click', '#btnDelete', function() {
 		var url = "${pageContext.request.contextPath}/board/deleteBoard";
 		url = url + "?bid=" + ${boardContent.bid};
+		url = url + "&page="+$('#page').val();
+		url = url + "&range="+$('#range').val();
+		url = url + "&searchType="+$('#searchType').val();
+		url = url + "&keyword="+$('#keyword').val();
 		location.href = url;
 	});
 	
@@ -68,10 +78,11 @@
 
 			if(result.length < 1){
 
-				htmls.push("등록된 댓글이 없습니다.");
+				htmls = "등록된 댓글이 없습니다.";
 
 			} else {
-
+				
+						
 	                    $(result).each(function(){
 
 	                     htmls += '<div class="media text-muted pt-3" id="rid' + this.rid + '">';
@@ -153,6 +164,7 @@
 				}
 				
 		});
+		location.reload();
 	});
 	
 	//댓글 수정 
@@ -223,7 +235,7 @@
 					console.log("에러 :" + error);
 				}
 		});
-		location.reload();
+		//location.reload();
 	}
 	
 </script>
@@ -246,6 +258,14 @@
 			
 			<div style = "marin-top : 20px">
 				
+				<form name="readForm" role="form" method="post">
+				  <input type="hidden" id="bid" name="bid" value="${boardContent.bid}" />
+				  <input type="hidden" id="page" name="page" value="${search.page}"> 
+				  <input type="hidden" id="range" name="range" value="${search.range}"> 
+				  <input type="hidden" id="searchType" name="searchType" value="${search.searchType}"> 
+				  <input type="hidden" id="keyword" name="keyword" value="${search.keyword}"> 
+				</form>
+				
 				<button type = "button" class = "btn btn-sm btn-primary" id = "btnUpdate">수정</button>
 				<button type = "button" class = "btn btn-sm btn-primary" id = "btnDelete">삭제</button>
 				
@@ -253,6 +273,7 @@
 			</div>
 			
 			<!--  Reply Form -->
+			<c:if test="${member.userId != null}">
 			<div class = "my-3 p-3 bg-white rounded shadow-sm" style = "padding-top : 10px">
 				<form:form name = "form" id = "form" role = "form" modelAttribute = "replyVO" method = "POST">
 				<form:hidden path = "bid" id = "bid"/>
@@ -263,14 +284,16 @@
 					</div>
 					<div class = "col-sm-2">
 						<form:input path = "reg_id" class = "form-control" id = "reg_id" 
-							placeholder = "댓글 작성자"></form:input>
+							value = "${member.userId}" readonly = "true"></form:input>
 						<button type = "button" class = "btn btn-sm btn-primary" id = "btnReplySave"
 							style = "width: 100%; margin-top : 10px">저 장</button>
 					</div>
 				</div>
 				</form:form>
 			</div>
+			</c:if>
 		</div>
+		
 		<!-- Reply Form{e} -->
 		
 		<!-- Reply List{s} -->

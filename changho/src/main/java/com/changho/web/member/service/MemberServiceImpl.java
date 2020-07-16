@@ -12,6 +12,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Inject MemberDAO dao;
 	
+	//회원가입 
 	@Override
 	public void register(MemberVO memberVO) throws Exception {
 		
@@ -19,6 +20,7 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 	
+	// 로그인 
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception {
 		return dao.login(memberVO);

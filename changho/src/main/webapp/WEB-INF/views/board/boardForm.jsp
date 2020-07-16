@@ -33,17 +33,43 @@
 
 	// 글 저장 
 	$(document).on('click','#btnSave', function(e) {
+	
+		
+		if($("#title").val()==""){
+			alert("제목을 입력해주세요.");
+			$("#userPass").focus();
+			return false;
+		}
+			
+		if($("#content").val()==""){
+			alert("내용을 입력해주세요.");
+			$("#content").focus();
+			return false;
+		
+		}
+		$("#form").submit();
+	})
+	
+	// 취소 버튼
+	$(document).on('click','#btnCancel', function(e) {
 		e.preventDefault();
 		
-		$("#form").submit();
+		var mode = '<c:out value="${mode}"/>';
+		
+		if ( mode == 'edit'){
+			
+			location.href = "${pageContext.request.contextPath}/board/getBoardContent?bid=${boardContent.bid}&page=${search.page}"
+							+ "&range=${search.range}"
+							+ "&searchType=${search.searchType}&keyword=${search.keyword}";
+		}else{
+			
+			location.href = "${pageContext.request.contextPath}/board/getBoardList";
+		}
+		
+	
 	});
 	
-	// 목록 버튼
-	$(document).on('click','#btnList', function(e) {
-		e.preventDefault();
-		
-		location.href = "${pageContext.request.contextPath}/board/getBoardList";
-	});
+	
 	
 	//글 수정 
 	$(document).ready(function(){
@@ -72,6 +98,7 @@
 
 	});
 </script>
+
 <style>
 body {
 	padding-top : 0px;
@@ -84,7 +111,7 @@ body {
 	<article>
 		<div class = "container" role = "main">
 			<h2>board Form</h2>
-			<c:if test="${member != null }">
+			
 			<form:form name = "form" id = "form" role = "form" modelAttribute = "boardVO" method = "post" 
 				action = "${pageContext.request.contextPath}/board/saveBoard">
 				<form:hidden path = "bid"/>
@@ -98,7 +125,7 @@ body {
 				
 				<div class = "mb-3">
 					<label for = "reg_id">작성자</label>
-					<form:input path ="reg_id" id = "reg_id" class = "form-control"  />
+					<form:input path ="reg_id" id = "reg_id" class = "form-control" value = "${member.userId}" readonly ="true"/>
 				</div>
 				
 				<div class = "mb-3">
@@ -112,10 +139,11 @@ body {
 				</div>
 			
 				</form:form>
-				</c:if>
+				
 				<div>
+				
 					<button type = "button" class = "btn btn-sm btn-primary" id = "btnSave">저장</button>
-					<button type = "button" class = "btn btn-sm btn-primary" id = "btnList">목록</button>
+					<button type = "button" class = "btn btn-sm btn-primary" id = "btnCancel">취소</button>
 					
 				</div>
 				
